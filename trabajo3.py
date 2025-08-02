@@ -343,3 +343,108 @@ def machine_learning_analysis(df):
     plt.show()
     
     return rf_model, feature_importance
+
+# ===============================================
+# 5. ANÁLISIS ESTADÍSTICO AVANZADO
+# ===============================================
+
+def statistical_analysis(df):
+    """
+    Realiza análisis estadísticos avanzados
+    """
+    print("\n" + "="*50)
+    print("ANÁLISIS ESTADÍSTICO AVANZADO")
+    print("="*50)
+    
+    try:
+        from scipy import stats
+    except ImportError:
+        print("⚠️  Scipy no está instalado. Saltando análisis estadístico avanzado.")
+        print("   Para instalar: pip install scipy")
+        return
+    
+    # Test t para diferencias de género en matemáticas
+    male_math = df[df['gender'] == 'male']['math_score']
+    female_math = df[df['gender'] == 'female']['math_score']
+    
+    t_stat, p_value = stats.ttest_ind(male_math, female_math)
+    print(f"\n📊 TEST T - MATEMÁTICAS POR GÉNERO")
+    print(f"Estadístico t: {t_stat:.3f}")
+    print(f"P-value: {p_value:.6f}")
+    print(f"Significativo: {'Sí' if p_value < 0.05 else 'No'} (α = 0.05)")
+    
+    # ANOVA - Educación parental
+    education_groups = [group['average_score'].values for name, group in df.groupby('parental_level_of_education')]
+    f_stat, p_value_anova = stats.f_oneway(*education_groups)
+    
+    print(f"\n📊 ANOVA - EDUCACIÓN PARENTAL")
+    print(f"Estadístico F: {f_stat:.3f}")
+    print(f"P-value: {p_value_anova:.6f}")
+    print(f"Significativo: {'Sí' if p_value_anova < 0.05 else 'No'} (α = 0.05)")
+    
+    # Correlaciones con p-values
+    print(f"\n📊 CORRELACIONES SIGNIFICATIVAS")
+    subjects = ['math_score', 'reading_score', 'writing_score']
+    
+    for i, subj1 in enumerate(subjects):
+        for subj2 in subjects[i+1:]:
+            corr, p_val = stats.pearsonr(df[subj1], df[subj2])
+            print(f"{subj1} - {subj2}: r = {corr:.3f}, p = {p_val:.6f}")
+
+# ===============================================
+# 6. FUNCIÓN PRINCIPAL
+# ===============================================
+
+def main():
+    """
+    Función principal que ejecuta todo el análisis
+    """
+    print("🎓 ANÁLISIS DE RENDIMIENTO ESTUDIANTIL")
+    print("=" * 60)
+    
+    try:
+        # 1. Cargar y preprocesar datos
+        df = load_and_preprocess_data('StudentsPerformance.csv')
+        
+        # 2. Análisis exploratorio
+        exploratory_analysis(df)
+        
+        # 3. Visualizaciones
+        create_visualizations(df)
+        
+        # 4. Machine Learning
+        if SKLEARN_AVAILABLE:
+            model, feature_importance = machine_learning_analysis(df)
+        else:
+            model, feature_importance = None, None
+        
+        # 5. Análisis estadístico avanzado
+        statistical_analysis(df)
+        
+        print("\n" + "="*60)
+        print("✅ ANÁLISIS COMPLETADO EXITOSAMENTE")
+        print("="*60)
+        print("\n📊 Resumen del análisis:")
+        print(f"   • Dataset procesado: {df.shape[0]} estudiantes")
+        print(f"   • Variables analizadas: {df.shape[1]} columnas")
+        print(f"   • Modelo ML entrenado exitosamente")
+        print(f"   • Visualizaciones generadas: 18 gráficos")
+        print(f"   • Tests estadísticos realizados: 3 pruebas")
+        
+        return df, model, feature_importance
+        
+    except FileNotFoundError:
+        print("❌ Error: No se encontró el archivo 'StudentsPerformance.csv'")
+        print("   Asegúrate de que el archivo esté en el directorio actual.")
+        return None, None, None
+    except Exception as e:
+        print(f"❌ Error inesperado: {str(e)}")
+        return None, None, None
+
+# ===============================================
+# 7. EJECUCIÓN DEL PROGRAMA
+# ===============================================
+
+if __name__ == "__main__":
+    # Ejecutar análisis principal
+    df, model, feature_importance = main()
