@@ -125,6 +125,6 @@ El análisis revela un sistema educativo con disparidades sistemáticas basadas 
 La prioridad debe ser abordar las inequidades socioeconómicas mientras se desarrollan estrategias pedagógicas que aprovechen la interconexión de las habilidades académicas para maximizar el impacto educativo.
 
 ## Autores
-Juan Miguel Llumihuasi
-Israel Alvarez Reinoso
-Luz Mollacano Sabando
+* Juan Miguel Llumihuasi
+* Israel Alvarez Reinoso
+* Luz Mollacano Sabando
