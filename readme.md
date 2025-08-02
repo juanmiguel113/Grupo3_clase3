@@ -64,7 +64,7 @@ Si alguna biblioteca no está instalada, se omitirán funciones específicas (co
 ## Notas adicionales
 Este análisis es ideal para fines educativos, especialmente para quienes están aprendiendo sobre ciencia de datos aplicada al análisis educativo.
 
-### Análisis y Conclusiones del Rendimiento Estudiantil
+# Análisis y Conclusiones del Rendimiento Estudiantil
 
 ## Resumen
 
