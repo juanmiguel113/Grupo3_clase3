@@ -14,7 +14,7 @@ del procesamiento y entendimiento de los datos:
 4. Machine Learning
 5. Análisis estadístico avanzado
 
-##Requisitos para ejecutar
+## Requisitos para ejecutar
 Antes de ejecutar el script, asegúrate de tener instaladas las siguientes bibliotecas:
 
 pip install pandas matplotlib seaborn scikit-learn scipy
@@ -64,5 +64,5 @@ Si alguna biblioteca no está instalada, se omitirán funciones específicas (co
 ## Notas adicionales
 Este análisis es ideal para fines educativos, especialmente para quienes están aprendiendo sobre ciencia de datos aplicada al análisis educativo.
 
-## Autor
+## Autores
 Juan Miguel Llumihuasi
